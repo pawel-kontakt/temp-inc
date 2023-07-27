@@ -52,3 +52,6 @@ Modules and their description:
   * list of anomalies per thermometer id
   * list of anomalies per room id
   * list of thermometers with amount of anomalies higher that threshold (provided as query param or from properties)
+
+  
+Repository is configured as template, please do not fork it, you can create a copy of this repo, [docs here](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template).
