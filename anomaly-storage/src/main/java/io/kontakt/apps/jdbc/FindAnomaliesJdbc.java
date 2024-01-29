@@ -20,6 +20,6 @@ class FindAnomaliesJdbc implements FindAnomalies {
 
     @Override
     public Anomalies all() {
-        return new AnomaliesJdbc(jdbcTemplate, Pagination.firstPage(), Filter.noCriteria());
+        return new AnomaliesJdbc(jdbcTemplate, Pagination.firstPage(), Filter.noFilter());
     }
 }

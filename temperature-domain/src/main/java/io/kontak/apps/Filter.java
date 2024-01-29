@@ -1,32 +1,40 @@
 package io.kontak.apps;
 
-public record Filter(String roomId, String thermometerId) {
+import java.math.BigDecimal;
 
-    public static Filter noCriteria() {
-        return new CriteriaBuilder().build();
+public record Filter(String roomId, String thermometerId, BigDecimal threshold) {
+
+    public static Filter noFilter() {
+        return new FilterBuilder().build();
     }
 
-    public static CriteriaBuilder builder() {
-        return new CriteriaBuilder();
+    public static FilterBuilder builder() {
+        return new FilterBuilder();
     }
 
-    public static class CriteriaBuilder {
+    public static class FilterBuilder {
 
         private String roomId;
         private String thermometerId;
+        private BigDecimal threshold;
 
-        public CriteriaBuilder roomId(String roomId) {
+        public FilterBuilder roomId(String roomId) {
             this.roomId = roomId;
             return this;
         }
 
-        public CriteriaBuilder thermometerId(String thermometerId) {
+        public FilterBuilder thermometerId(String thermometerId) {
             this.thermometerId = thermometerId;
             return this;
         }
 
+        public FilterBuilder threshold(BigDecimal threshold) {
+            this.threshold = threshold;
+            return this;
+        }
+
         public Filter build() {
-            return new Filter(roomId, thermometerId);
+            return new Filter(roomId, thermometerId, threshold);
         }
     }
 }

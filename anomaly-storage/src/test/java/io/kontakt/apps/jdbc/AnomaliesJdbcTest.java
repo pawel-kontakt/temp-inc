@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -56,6 +58,17 @@ class AnomaliesJdbcTest {
         assertAll(
                 () -> assertThat(all.size()).isEqualTo(1),
                 () -> assertThat(all.get(0).roomId()).isEqualTo("room_2")
+        );
+    }
+
+    @Test
+    void anomalies_are_filtered_by_threshold() {
+        var anomalies = findAnomalies.all().filterBy(Filter.builder().threshold(BigDecimal.valueOf(21.0)).build());
+        var all = anomalies.stream().toList();
+
+        assertAll(
+                () -> assertThat(all.size()).isEqualTo(1),
+                () -> assertThat(all.get(0).roomId()).isEqualTo("room_3")
         );
     }
 
