@@ -54,8 +54,8 @@ class AnomaliesJdbc implements Anomalies {
 
         if (filter.threshold() != null) {
             params.add(filter.threshold());
-            query = query.contains("WHERE") ? query.concat(" AND temperature > ? GROUP BY thermometer_id")
-                    : query.concat(" WHERE temperature > ? GROUP BY thermometer_id");
+            query = query.contains("WHERE") ? query.concat(" AND temperature > ? GROUP BY thermometer_id, anomaly_time, room_id")
+                    : query.concat(" WHERE temperature > ? GROUP BY thermometer_id, anomaly_time, room_id");
         }
 
         params.add(pagination.offset());

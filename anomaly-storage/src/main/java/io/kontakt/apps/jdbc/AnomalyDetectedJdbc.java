@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-class AnomalyDetectedJdbc implements AnomalyDetected {
+public class AnomalyDetectedJdbc implements AnomalyDetected {
 
     private final JdbcTemplate jdbcTemplate;
 
