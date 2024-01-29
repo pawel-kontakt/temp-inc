@@ -1,6 +1,7 @@
 package io.kontak.apps.temperature.generator;
 
 import io.kontak.apps.event.TemperatureReading;
+import java.nio.charset.StandardCharsets;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -11,17 +12,20 @@ import reactor.core.publisher.Sinks;
 @Component
 public class TemperatureStreamPublisher {
 
-    private final Sinks.Many<Message<TemperatureReading>> messageProducer = Sinks.many().multicast().onBackpressureBuffer();
+  private final Sinks.Many<Message<TemperatureReading>> messageProducer = Sinks.many().multicast()
+      .onBackpressureBuffer();
 
-    public Flux<Message<TemperatureReading>> getMessageProducer() {
-        return messageProducer.asFlux();
-    }
+  public Flux<Message<TemperatureReading>> getMessageProducer() {
+    return messageProducer.asFlux();
+  }
 
-    public void publish(TemperatureReading temperatureReading) {
-        messageProducer.tryEmitNext(
-                MessageBuilder.withPayload(temperatureReading)
-                        .setHeader("identifier", temperatureReading.thermometerId())
-                        .build()
-        );
-    }
+  public void publish(TemperatureReading temperatureReading) {
+    messageProducer.tryEmitNext(
+        MessageBuilder.withPayload(temperatureReading)
+            .setHeader(KafkaHeaders.MESSAGE_KEY, temperatureReading.thermometerId().getBytes(
+                StandardCharsets.UTF_8))
+            .setHeader("identifier", temperatureReading.thermometerId())
+            .build()
+    );
+  }
 }
