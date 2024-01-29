@@ -2,13 +2,14 @@ package io.kontak.apps.anomaly.detector;
 
 import io.kontak.apps.event.Anomaly;
 import io.kontak.apps.event.TemperatureReading;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
 public class AlwaysAnomalyAnomalyDetector implements AnomalyDetector {
+
+    private static final int WINDOW_SIZE = 1;
+
     @Override
     public Optional<Anomaly> apply(List<TemperatureReading> temperatureReadings) {
 
@@ -19,5 +20,10 @@ public class AlwaysAnomalyAnomalyDetector implements AnomalyDetector {
                 temperatureReading.thermometerId(),
                 temperatureReading.timestamp()
         ));
+    }
+
+    @Override
+    public Integer windowSize() {
+        return WINDOW_SIZE;
     }
 }
