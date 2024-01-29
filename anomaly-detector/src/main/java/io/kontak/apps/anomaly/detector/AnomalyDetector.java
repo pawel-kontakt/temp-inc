@@ -9,4 +9,5 @@ import java.util.function.Function;
 
 public interface AnomalyDetector extends Function<List<TemperatureReading>, Optional<Anomaly>> {
 
+    Integer windowSize();
 }
