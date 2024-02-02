@@ -65,7 +65,7 @@ public class TestKafkaConsumer<V> implements Closeable {
         Awaitility.await()
                 .atMost(waitAtMost)
                 .pollInterval(Durations.ONE_HUNDRED_MILLISECONDS).until(() -> {
-                    ConsumerRecords<String, V> poll = consumer.poll(Duration.ofMillis(50));
+                    ConsumerRecords<String, V> poll = consumer.poll(Duration.ofMillis(1550));
                     poll
                             .iterator()
                             .forEachRemaining(allRecords::add);

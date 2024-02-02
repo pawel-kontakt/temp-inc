@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
+
 @Component
 public class TemperatureStreamPublisher {
 
@@ -20,8 +21,10 @@ public class TemperatureStreamPublisher {
     public void publish(TemperatureReading temperatureReading) {
         messageProducer.tryEmitNext(
                 MessageBuilder.withPayload(temperatureReading)
-                        .setHeader("identifier", temperatureReading.thermometerId())
+                        .setHeader(KafkaHeaders.MESSAGE_KEY, temperatureReading.roomId())
+                        .setHeader("identifier", temperatureReading.roomId())
                         .build()
         );
     }
+
 }
