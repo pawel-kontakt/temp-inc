@@ -27,6 +27,8 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TOOLS_LOG4J_LOGLEVEL: ERROR
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
 
   kafdrop-temp-task:
     image: obsidiandynamics/kafdrop:3.31.0
@@ -38,3 +40,11 @@ services:
       - 8085:9000
     environment:
       KAFKA_BROKERCONNECT: broker-temp-task:9092
+  mongodb-temp-task:
+    image: mongo:latest
+    container_name: mongodb-temp-task
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin

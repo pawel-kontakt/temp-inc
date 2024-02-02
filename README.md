@@ -1,6 +1,7 @@
 # Temp-Inc
 'Always Right Temp Inc' temperature anomalies solution 
 
+NOTE * The launch should start with the temperature-generator project since it sets the initial number of partitions
 ## Recruitment Task Description
 
 Introducing 'Always Right Temp Inc' 🌡️🌞, the masters of temperature sensors! They've entrusted you to create an anomaly detector.

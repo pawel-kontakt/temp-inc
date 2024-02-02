@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-@Component
+//@Component
 public class SimpleTemperatureGenerator implements TemperatureGenerator {
 
     private final Random random = new Random();
